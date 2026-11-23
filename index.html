@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡TE GANASTE UN PREMIO! 🎁</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #ffcc00;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        #inicio {
+            padding-top: 120px;
+        }
+
+        h1 {
+            font-size: 38px;
+            color: #d40000;
+        }
+
+        button {
+            font-size: 26px;
+            padding: 20px 40px;
+            background: #00c853;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #009624;
+        }
+
+        #chisme {
+            display: none;
+            background: #ff0066;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #chisme h1 {
+            color: white;
+            font-size: 42px;
+            padding-top: 15px;
+            margin: 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        #chisme h2 {
+            color: yellow;
+            margin: 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .columna {
+            position: absolute;
+            top: -100px;
+            width: 150px;
+            text-align: center;
+            animation: caer 5s linear infinite;
+        }
+
+        .frase {
+            display: block;
+            margin: 18px 0;
+            font-weight: bold;
+            color: white;
+            background: #00000066;
+            padding: 8px 5px;
+            border-radius: 12px;
+            font-size: 16px;
+        }
+
+        @keyframes caer {
+            from {
+                top: -400px;
+            }
+
+            to {
+                top: 110vh;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="inicio">
+        <h1>🎁 ¡TE GANASTE UN PREMIO! 🎁</h1>
+        <p style="font-size:22px;">¡Felicidades! Haz clic para abrirlo</p>
+        <button onclick="abrir()">ABRIR PREMIO 👈</button>
+        <p>👀 te espera </p>
+    </div>
+
+    <div id="chisme">
+        <h1>😂 ¡BIENVENIDO CHISMOSO! 😂</h1>
+        <h2>CAÍSTE JAJAJA</h2>
+    </div>
+
+    <script>
+        function abrir() {
+            document.getElementById('inicio').style.display = 'none';
+            document.getElementById('chisme').style.display = 'block';
+
+            // SONIDO - el mismo del anterior
+            let audio = new Audio('https://www.myinstants.com/media/sounds/vine-boom.mp3');
+            audio.volume = 1.0;
+            audio.play();
+
+            // Que suene 2 veces para que se escuche bien
+            setTimeout(() => { let audio2 = new Audio('https://www.myinstants.com/media/sounds/vine-boom.mp3'); audio2.play(); }, 600);
+
+            let frases = [
+                "ERES EL CHISMOSO 😂",
+                "CHISMOSO 👀",
+                "¡TE DESCUBRIMOS!",
+                "BIENVENIDO CHISMOSO",
+                "JAJAJA CAÍSTE",
+                "CHISMEANDO ANDABAS"
+            ];
+
+            for (let c = 0; c < 6; c++) {
+                let col = document.createElement('div');
+                col.className = 'columna';
+                col.style.left = (c * 16 + 2) + 'vw';
+                col.style.animationDelay = (c * 0.8) + 's';
+
+                for (let f = 0; f < 6; f++) {
+                    let span = document.createElement('span');
+                    span.className = 'frase';
+                    span.innerText = frases[(f + c) % frases.length];
+                    col.appendChild(span);
+                }
+                document.getElementById('chisme').appendChild(col);
+            }
+        }
+    </script>
+
+</body>
+
+</html>
